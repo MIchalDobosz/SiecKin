@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/style.css">
+
+    <title>Potwierdzenie zakupu</title>
+</head>
+
+<body>
+<div class="container-fluid">
+    <div class="container bg-light" id="middle-container">
+        <div class="d-flex justify-content-center pt-5 pb-5">
+            <div class="col-4 img ">
+                <h1><img src="/logo.png" alt="Logo Helix" width="55%"></h1>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center pt-3 pb-3 bg-dark">
+            <h1 class="display-5 text-white"> Potwierdzenie zakupu </h1>
+        </div>
+        <div class="d-flex justify-content-center" id="list-container" >
+            <div class="col-12">
+                <ul>
+                    <li id="li-header">
+                        <label class="li-header1">Seans</label>
+                        <label class="li-header1">Data seansu</label>
+                        <label class="li-header1">Miejsce</label>
+                        <label class="li-header1">Rodzaj biletu</label>
+                        <label class="li-header1">Data Sprzedaży</label>
+                    </li>
+                    <li id="li-data" th:each ="ticket : ${ticketList}">
+                        <label class="li-data1" th:utext="${ticket.screening.movie.title}"></label>
+                        <label class="li-data1" th:utext="${ticket.screening.date}"></label>
+                        <label class="li-data1" th:utext="${ticket.seat}"></label>
+                        <label class="li-data1" th:utext="${ticket.ticketType.name}"></label>
+                        <label class="li-data1" th:utext="${ticket.saleDate}"></label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+</body>
+
+</html>
+
+
+
+
+
+

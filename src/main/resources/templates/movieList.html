@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/style.css">
+
+    <title>List filmów</title>
+</head>
+
+<body>
+<div class="container-fluid">
+    <div class="container bg-light" id="middle-container">
+        <div class="d-flex justify-content-center pt-5 pb-5">
+            <div class="col-4 img ">
+                <h1><img src="/logo.png" alt="Logo Helix" width="55%"></h1>
+            </div>
+        </div>
+        <div class="row">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container-fluid">
+                    <a class="btn" th:href="${'/'}">Strona główna</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Bilety
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <li><a class="dropdown-item" href="/new_ticket">Dodaj bilet</a></li>
+                                    <li><a class="dropdown-item" href="/ticket_list">Lista biletów</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Seanse
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <li><a class="dropdown-item" href="/new_screening">Dodaj seans</a></li>
+                                    <li><a class="dropdown-item" href="/screening_list">Lista seasnów</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdownMenuLink3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Filmy
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <li><a class="dropdown-item" href="/new_movie">Dodaj film</a></li>
+                                    <li><a class="dropdown-item" href="/movie_list">Lista filmów</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink4" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Sale
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <li><a class="dropdown-item" href="/new_theater">Dodaj sale</a></li>
+                                    <li><a class="dropdown-item" href="/theater_list">Lista sal</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink5" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Kina
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <li><a class="dropdown-item" href="/new_cinema">Dodaj kino</a></li>
+                                    <li><a class="dropdown-item" href="/cinema_list">Lista kin</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Klienci
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <li><a class="dropdown-item" href="/new_client">Dodaj klienta</a></li>
+                                    <li><a class="dropdown-item" href="/client_list">Lista klientów</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <div class="row justify-content-center" id="form-container">
+            <div class="row">
+                <form method="POST" th:object="${filter}" id="form-container1">
+                    <div class="row">
+                        <div class="col-2">
+                            <select class="form-select form-select-md" aria-label=".form-select-sm example" th:field="${filter.type}">
+                                <option selected value="title">Tytuł</option>
+                                <option value="director">Reżyser</option>
+                                <option value="releaseDate">Data premiery</option>
+                                <option value="genre">Gatunek</option>
+                                <option value="runtime">Czas trwania</option>
+                            </select>
+                        </div>
+                        <div class="col-3">
+                            <input type="text" class="form-control" aria-label="Text input with 2 dropdown buttons", th:field="${filter.value}">
+                        </div>
+                        <div class="col-1">
+                            <input class="btn" type="submit" id="button-addon1" value="Szukaj">
+                        </div>
+                        <div class="col-1">
+                            <label></label>
+                        </div>
+                        <div class="col-2">
+                            <select class="form-select form-select-md" aria-label=".form-select-sm example" th:field="${filter.sort}">
+                                <option selected value="title">Tytuł</option>
+                                <option value="director">Reżyser</option>
+                                <option value="releaseDate">Data premiery</option>
+                                <option value="genre">Gatunek</option>
+                                <option value="runtime">Czas trwania</option>
+                            </select>
+                        </div>
+                        <div class="col-1">
+                            <input class="btn" type="submit" id="button-addon2" value="Sortuj">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="d-flexjustify-content-center" id="list-container" >
+            <div class="col-10">
+                <ul>
+                    <li id="li-header">
+                        <label class="li-header1">ID</label>
+                        <label class="li-header1">Tytuł</label>
+                        <label class="li-header1">Reżyser</label>
+                        <label class="li-header1">Data premiery</label>
+                        <label class="li-header1">Gatunek</label>
+                        <label class="li-header1">Czas trwania</label>
+                        <label class="li-header1"></label>
+                    </li>
+                    <li id="li-data" th:each ="movie : ${movieList}">
+                        <label class="li-data1"th:utext="${movie.id}"></label>
+                        <label class="li-data1"th:utext="${movie.title}"></label>
+                        <label class="li-data1" th:utext="${movie.director}"></label>
+                        <label class="li-data1" th:utext="${movie.releaseDate}"></label>
+                        <label class="li-data1" th:utext="${movie.genre}"></label>
+                        <label class="li-data1" th:utext="${movie.runtime}"></label>
+                        <label class="li-data1">
+                            <a class="btn col-1"  th:href="${'delete_movie/' + movie.id}">Usuń</a>
+                            <a class="btn col-1"  th:href="${'edit_movie/' + movie.id}">Edytuj</a>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
